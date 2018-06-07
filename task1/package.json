@@ -1,0 +1,14 @@
+{
+  "name": "nodejs-commander",
+  "version": "1.0.0",
+  "description": "NodeJS CLI application that using package commander.",
+  "main": "app.js",
+  "scripts": {
+    "test": "run"
+  },
+  "author": "Leo",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^2.15.1"
+  }
+}
