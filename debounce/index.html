@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body style="font-size: 20px;">
+  <div id="country">
+    <div id="country-name"></div>
+    <img src="" alt="" id="flag" width="60" height="40">
+  </div>
+  <input type="text" id="input">
+
+  <script>
+    'use strict';
+    const apiUrl = 'https://restcountries.eu/rest/v2/name/';
+    const inpt = document.querySelector('#input');
+    const ctrName = document.querySelector('#country-name');
+
+    function buildCtrHtml(ctr) {
+      const ctrFlag = document.querySelector('#flag');
+
+      ctrName.innerText = ctr.name;
+      ctrFlag.src = ctr.flag;
+      // console.log(ctr);
+    }
+
+    inpt.addEventListener('keyup', function(){
+      const inptValue = this.value;
+      const cont = apiUrl + inptValue;
+
+      console.log(cont);
+
+      fetch(cont).then(function(response) {
+        console.log(response);
+        return response.json();
+      })
+      .then(function(countries) {
+        if (countries.length > 1) {
+          ctrName.innerHTML = '';
+          return;
+        }
+
+        const cntr = countries[0];
+        buildCtrHtml(cntr);
+      })
+      .catch(function() {
+        ctrName.innerHTML = 'No country found :(';
+      });
+    });
+  </script>
+</body>
+</html>
