@@ -19,6 +19,8 @@
     const inpt = document.querySelector('#input');
     const ctrName = document.querySelector('#country-name');
 
+    let timeOut = -1;
+
     function buildCtrHtml(ctr) {
       const ctrFlag = document.querySelector('#flag');
 
@@ -31,24 +33,29 @@
       const inptValue = this.value;
       const cont = apiUrl + inptValue;
 
-      console.log(cont);
+      if (timeOut >= 0) {
+        clearTimeout(timeOut);
+      }
 
-      fetch(cont).then(function(response) {
-        console.log(response);
-        return response.json();
-      })
-      .then(function(countries) {
-        if (countries.length > 1) {
-          ctrName.innerHTML = '';
-          return;
-        }
+      timeOut = setTimeout(function() {
+        timeOut = -1;
+        fetch(cont).then(function(response) {
+          console.log(response);
+          return response.json();
+        })
+        .then(function(countries) {
+          if (countries.length > 1) {
+            ctrName.innerHTML = '';
+            return;
+          }
 
-        const cntr = countries[0];
-        buildCtrHtml(cntr);
-      })
-      .catch(function() {
-        ctrName.innerHTML = 'No country found :(';
-      });
+          const cntr = countries[0];
+          buildCtrHtml(cntr);
+        })
+        .catch(function() {
+          ctrName.innerHTML = 'No country found :(';
+        });
+      }, 3000);
     });
   </script>
 </body>
