@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TODO Sooqa</title>
+  <script src="./main.js"></script>
+  <style>
+    body {
+      background-color: #eaeaea;
+      margin: 0;
+      font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    }
+    #main {
+      box-shadow: 1px 1px 10px rgba(0,0,0, .4);
+      max-width: 300px;
+      margin: 50px auto;
+      padding: 50px;
+      background-color: #fff;
+      line-height: 1.5em;
+      border-radius: 5px;
+    }
+    label {display: block; margin-bottom: 10px;}
+    #enter {
+      padding: 10px;
+      width: 100%;
+      border-radius: 5px;
+      border-color: #ccc;
+      border-style: solid;
+      margin-bottom: 10px;
+    }
+    button {
+      cursor: pointer;
+      padding: 10px 30px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <form>
+      <label for="enter">What TO DO:</label><input name="task" placeholder="Buy milk" type="text" id="enter">
+      <button>Add</button>
+    </form>
+  </div>
+</body>
+</html>
