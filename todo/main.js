@@ -7,7 +7,8 @@ const app = {
     }
   },
   deleteTask: function(task) {
-    let indOf = app.tasks.indexOf(task)
+    let indOf = app.tasks.indexOf(task);
+    
     if (indOf >= 0) {
       app.tasks.splice(indOf, 1);
       app.renderTasks();
@@ -16,7 +17,10 @@ const app = {
   handleClick: function(e) {
     e.preventDefault();
     const val = document.querySelector('#enter').value;
-    app.addTask(val);
+
+    if (val.length) {
+      app.addTask(val);
+    }
 
     return false;
   },
@@ -33,12 +37,10 @@ const app = {
 
     list.innerHTML = tasks;
 
-    if (app.tasks.length > 0) {
-      list.querySelector('li').addEventListener('click', function(arg) {
-        var task = arg.target.innerText;
-        app.deleteTask(task);
-      });
-    }
+    list.querySelector('li').addEventListener('click', function(arg) {
+      var task = arg.target.innerText;
+      app.deleteTask(task);
+    });
   }
 }
 
