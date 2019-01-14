@@ -8,6 +8,7 @@ const app = {
   },
   deleteTask: function(task) {
     let indOf = app.tasks.indexOf(task);
+    
     if (indOf >= 0) {
       app.tasks.splice(indOf, 1);
       app.renderTasks();
