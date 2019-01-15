@@ -47,7 +47,7 @@ window.todoApp = {
 
 
       let existingTasksList = list.querySelectorAll('li');
-      for (let singleTask of tasksList) {
+      for (let singleTask of existingTasksList) {
         singleTask.addEventListener('click', function(arg) {
           var task = arg.target.innerText;
           app.deleteTask(task);
