@@ -45,10 +45,15 @@ window.todoApp = {
 
       list.innerHTML = tasks;
 
-      list.querySelector('li').addEventListener('click', function(arg) {
-        var task = arg.target.innerText;
-        app.deleteTask(task);
-      });
+
+      let existingTasksList = list.querySelectorAll('li');
+      for (let singleTask of tasksList) {
+        singleTask.addEventListener('click', function(arg) {
+          var task = arg.target.innerText;
+          app.deleteTask(task);
+        });
+      }
+
       app.updateCounter()
     },
     updateCounter: function() {
