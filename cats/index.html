@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cats Sooqa</title>
+  <style type="text/css">
+    #random {
+      border-radius: 5px;
+      border:1px solid #888888;
+      padding:10px;
+      cursor: pointer;
+      display: inline-block;
+      background: #f1f1f1;
+      font-size: 32px;
+    }
+    #cat {
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id="random">Get Cat</div>
+    <img src="" id="cat" alt="random cat">
+  </div>
+  <script type="text/javascript">
+    const cat = document.querySelector('#cat')
+    const random = document.querySelector('#random')
+    const apiUrl = 'https://api.thecatapi.com/v1/images/search'
+    random.addEventListener('click', fetchData)
+
+    function fetchData(){
+      //fetch(apiUrl, {method: 'GET'});
+      var oReq = new XMLHttpRequest();
+      oReq.addEventListener("load", function(e){ 
+        const dataJSON = e.currentTarget.response
+        const data = JSON.parse(dataJSON);
+        const url = data[0].url;
+        renderHTML(url);
+        console.log(url)
+      });
+      oReq.open("GET", apiUrl);
+      oReq.send();
+    }
+
+    function renderHTML(url) {
+      if (url) {
+        cat.src = url
+      }
+    }
+
+
+  </script>
+</body>
+
+</html>
