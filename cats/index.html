@@ -29,20 +29,21 @@
     const cat = document.querySelector('#cat')
     const random = document.querySelector('#random')
     const apiUrl = 'https://api.thecatapi.com/v1/images/search'
+
+    function dataCb(data) {
+      const url = data[0].url
+      renderHTML(url)
+      console.log(url)
+    }
+
     random.addEventListener('click', fetchData)
 
     function fetchData(){
-      //fetch(apiUrl, {method: 'GET'});
-      var oReq = new XMLHttpRequest();
-      oReq.addEventListener("load", function(e){ 
-        const dataJSON = e.currentTarget.response
-        const data = JSON.parse(dataJSON);
-        const url = data[0].url;
-        renderHTML(url);
-        console.log(url)
-      });
-      oReq.open("GET", apiUrl);
-      oReq.send();
+      fetch(apiUrl, {method: 'GET'})
+      .then(response => response.json())
+      .then(dataCb)
+      .then(renderHTML)
+      .catch(console.log('error mathafacka'))
     }
 
     function renderHTML(url) {
@@ -50,7 +51,6 @@
         cat.src = url
       }
     }
-
 
   </script>
 </body>
