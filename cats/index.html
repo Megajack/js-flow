@@ -36,14 +36,30 @@
       console.log(url)
     }
 
-    random.addEventListener('click', fetchData)
+    random.addEventListener('click', function() {
+      const promises = []
+
+      for (let i = 0; i < 3; i++) {
+        const data = fetchData()
+        promises.push(data)
+        // console.log(data)
+      }
+
+      Promise.all(promises).then(e => console.log(e))
+    })
 
     function fetchData(){
-      fetch(apiUrl, {method: 'GET'})
+      return fetch(apiUrl, {method: 'GET'})
       .then(response => response.json())
-      .then(dataCb)
-      .then(renderHTML)
-      .catch(console.log('error mathafacka'))
+      .then(e => e[0])
+      .then(function(e) {
+        console.log(e)
+        return e;
+      })
+      .then(function(e) {
+        e.test = true;
+        return e;
+      })
     }
 
     function renderHTML(url) {
