@@ -9,20 +9,40 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   <script type="text/javascript" src="lib.js"></script>
+  <style>
+    .kick {
+      background: green;
+      width: 50px;
+      height: 50px;
+    }
+
+    .changey {
+      background: red;
+      width: 50px;
+      height: 50px;
+    }
+  </style>
 </head>
 
 <body>
   <div id="main">
     <button id='do' class="test">Do</button>
   </div>
+  <div class="kick"></div>
+  <div class="changey"></div>
 
   <script type="text/javascript">
-    
     const doButton = document.querySelector('#do');
     doButton.addEventListener('click', function(){
       const classCheck = window.lib.classCheck(this, 'test')
       console.log(classCheck)
     });
+
+    document.querySelector('.kick').addEventListener('click', window.lib.elemDelete)
+    document.querySelector('.changey').addEventListener('click', function(){
+      var div = this
+      window.lib.setHtml.call(div, doButton)
+    })
 
   </script>
 </body>
