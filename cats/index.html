@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cats Sooqa</title>
+  <style type="text/css">
+    #random {
+      border-radius: 5px;
+      border:1px solid #888888;
+      padding:10px;
+      cursor: pointer;
+      display: inline-block;
+      background: #f1f1f1;
+      font-size: 32px;
+    }
+    #cat {
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="main">
+    <div id="random">Get Cat</div>
+    <!-- <img src="" id="cat" alt="random cat"> -->
+    <div id="cat"></div>
+  </div>
+  <script type="text/javascript">
+    const cat = document.querySelector('#cat')
+    const random = document.querySelector('#random')
+    const apiUrl = 'https://api.thecatapi.com/v1/images/search'
+
+    function dataCb(data) {
+      const url = data[0].url
+      renderHTML(url)
+      console.log(url)
+    }
+
+    random.addEventListener('click', function() {
+      const promises = []
+
+      for (let i = 0; i < 3; i++) {
+        const data = fetchData()
+        promises.push(data)
+        // console.log(data)
+      }
+
+      Promise.all(promises).then(renderHTML)
+    })
+
+    function fetchData(){
+      return fetch(apiUrl, {method: 'GET'})
+      .then(response => response.json())
+      .then(e => e[0])
+      .then(function(e) {
+        return e.url
+      })
+    }
+
+    function renderHTML(urls) {
+      let str = ''
+      for (let url of urls) {
+        str += `<img src="${url}" width="200">`
+      }
+      cat.innerHTML = str
+    }
+
+  </script>
+</body>
+
+</html>

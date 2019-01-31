@@ -2,67 +2,61 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
 </head>
 
 <body style="font-size: 20px;">
-    <div id="country">
-        <div id="country-name"></div>
-        <div id="flag"></div>
-    </div>
-    <input type="text" id="input">
+  <div id="country">
+    <div id="country-name"></div>
+    <div id="flag"></div>
+  </div>
+  <input type="text" id="input">
 
-    <script>
-        'use strict';
-        const apiUrl = 'https://restcountries.eu/rest/v2/name/';
-        const inpt = document.querySelector('#input');
-        const ctrName = document.querySelector('#country-name');
+  <script>
+    const apiUrl = 'https://restcountries.eu/rest/v2/name/';
+    const inpt = document.querySelector('#input');
+    const ctrName = document.querySelector('#country-name');
+    let timeOut = -1;
 
-        let timeOut = -1;
+    function buildCtrHtml(ctr) {
+      const ctrFlag = document.querySelector('#flag');
 
-        function buildCtrHtml(ctr) {
-            console.log([ctrName])
-            const ctrFlag = document.querySelector('#flag');
+      ctrName.innerText += `, ${ctr.name}`;
+      ctrFlag.innerHTML += `<img src='${ctr.flag}' width="60" height="40">`;
+    }
 
-            ctrName.innerText += `, ${ctr.name}`;
-            ctrFlag.innerHTML += `<img src='${ctr.flag}' width="60" height="40">`;
-            // console.log(ctr);
-        }
+    inpt.addEventListener('keyup', function() {
+      const inptValue = this.value;
+      const cont = apiUrl + inptValue;
 
-        inpt.addEventListener('keyup', function() {
-            const inptValue = this.value;
-            const cont = apiUrl + inptValue;
+      if (timeOut >= 0) {
+        clearTimeout(timeOut);
+      }
 
-            if (timeOut >= 0) {
-                clearTimeout(timeOut);
-            }
+      timeOut = setTimeout(function() {
+        timeOut = -1;
+        fetch(cont).then(function(response) {
+          return response.json();
+        })
+        .then(function(countries) {
+          if (countries.length > 10) {
+            ctrName.innerHTML = '';
+            return;
+          }
 
-            timeOut = setTimeout(function() {
-                timeOut = -1;
-                fetch(cont).then(function(response) {
-                        console.log(response);
-                        return response.json();
-                    })
-                    .then(function(countries) {
-                        console.log(countries)
-                        if (countries.length > 10) {
-                            ctrName.innerHTML = '';
-                            return;
-                        }
-
-                        for (let country of countries) {
-                            buildCtrHtml(country);
-                        }
-                    })
-                    .catch(function() {
-                        ctrName.innerHTML = 'No country found :(';
-                    });
-            }, 1000);
+          for (let country of countries) {
+            buildCtrHtml(country);
+          }
+        })
+        .catch(function() {
+          ctrName.innerHTML = 'No country found :(';
         });
-    </script>
+      }, 1000);
+    });
+  </script>
 </body>
 
 </html>
