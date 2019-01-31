@@ -3,13 +3,78 @@
 <head>
   <meta charset="UTF-8">
   <title>Player UI</title>
+  <style>
+    .main-wrapper {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+    }
+
+    /* button::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      background: red;
+    } */
+
+    .showcase-container {
+      background: #000;
+      width: 100%;
+      margin-bottom: 10px;
+      padding-top: 75%; /* 4:3 Aspect Ratio */
+    }
+
+    #slider {
+      background: #eee;
+      height: 10px;
+      width: 100%;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    #slider .fill {
+      background: #ce2828;
+      width: 45%;
+      height: 100%;
+    }
+
+    #volume {
+      background: #eee;
+      display: inline-block;
+      width: 20px;
+      height: 70px;
+      position: relative;
+      margin-bottom: 20px;
+      vertical-align: top;
+    }
+
+    #volume .fill {
+      background: #ce2828;
+      width: 100%;
+      height: 45%;
+      position: absolute;
+      bottom: 0;
+    }
+  </style>
 </head>
 <body>
-  <div id="audio-controls">
-    <button id="play">Play/Pause</button>
-    <button id="rewind">Rewind</button>
-    <button id="forward">Forward</button>
-    <div id="slider"><div id="seeker"></div></div>
+  <div class="main-wrapper">
+    <div class="showcase-container">
+      <div class="showcase">AngryCat</div>
+    </div>
+    <div id="audio-controls">
+      <div id="slider"><div class="fill"></div></div>
+      <button id="backward">Rewind</button>
+      <button id="play">Play/Pause</button>
+      <button id="rewind">Rewind</button>
+      <button id="forward">Forward</button>
+      <div id="volume"><div class="fill"></div></div>
+    </div>
   </div>
 </body>
 </html>
