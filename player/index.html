@@ -40,9 +40,9 @@
       margin-bottom: 20px;
     }
 
-    #slider .fill {
+    #slider .slider-fill {
       background: #ce2828;
-      width: 45%;
+      width: 0%;
       height: 100%;
     }
 
@@ -56,10 +56,10 @@
       vertical-align: top;
     }
 
-    #volume .fill {
+    #volume .volume-fill {
       background: #ce2828;
       width: 100%;
-      height: 45%;
+      height: 0%;
       position: absolute;
       bottom: 0;
     }
@@ -73,13 +73,12 @@
       </div>
     </div>
     <div id="audio-controls">
-      <div id="slider"><div class="fill"></div></div>
-      <button id="backward">Rewind</button>
+      <div id="slider"><div class="slider-fill"></div></div>
+      <button id="backward">backward</button>
       <button id="play">Play/Pause</button>
-      <button id="rewind">Rewind</button>
       <button id="forward">Forward</button>
       <div id="volume"><div class="fill"></div></div>
-      
+
     </div>
   </div>
   <script type="text/javascript" src="controller.js"></script>
