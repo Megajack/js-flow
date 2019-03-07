@@ -16,11 +16,22 @@
 	<app>sd</app>
 	<script type="text/javascript">
 		window.component = function (app) {
+			this.updated = function () {
+				console.log('updated method');
+			}
 			this.template = function () {
-				return '<div>jopa</div>'
+				return '<input type="text" onChange="updated">';
 			}
 			console.log(app);
 			app.innerHTML = this.template();
+			this.input = document.querySelector('input[onChange]');
+			this.input.onChange = this.input.getAttribute('onChange');
+
+			if (typeof this[this.input.onChange] === 'function') {
+				this[this.input.onChange]();
+				// console.log('popali');
+			}
+			console.log(this.input.getAttribute('onChange'));
 		}
 		new window.component(document.querySelector('app'))
 	</script>
