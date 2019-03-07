@@ -16,8 +16,11 @@
     }
 
     .slider {
-        width: 50%;
-        margin: 100px auto;
+        width: 500px;
+        margin-left: 100px;
+        position: absolute;
+        top:0;
+        left:0;
     }
 
     .slick-slide {
@@ -92,6 +95,12 @@
         // console.log(slick.custom);
         slick.custom.changeColor()
       });
+      
+      $('.lazy').on('afterChange', function(event, slick, currentSlide){
+        // console.log(slick)
+        slick.custom.changePosition()
+      })
+      
     });
 </script>
 

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		app {
+			box-shadow:0 0 15px #ccc;
+			min-height: 200px;
+			min-width: 200px;
+			display: inline-block;
+		}
+	</style>
+	<script src="tcear.js"></script>
+</head>
+<body>
+	<app>sd</app>
+	<script type="text/javascript">
+		window.component = function (app) {
+			this.template = function () {
+				return '<div>jopa</div>'
+			}
+			console.log(app);
+			app.innerHTML = this.template();
+		}
+		new window.component(document.querySelector('app'))
+	</script>
+</body>
+</html>
